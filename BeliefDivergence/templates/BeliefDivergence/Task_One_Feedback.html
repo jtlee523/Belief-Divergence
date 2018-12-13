@@ -123,9 +123,9 @@ Real Percentages
 <div class="grid-container">
     
         <div class="row"> 
-            <div class="block-redReal"><p>40%</p></div> 
-            <div class="block-yellowReal"><p>50%</p></div> 
-            <div class="block-greenReal"><p>10%</p></div> 
+            <div id="RealRedBlock" class="block-redReal"></div> 
+            <div id="RealYellowBlock" class="block-yellowReal"></div> 
+            <div id="RealGreenBlock" class="block-greenReal"></div> 
         </div> <!-- with row -->
         
         
@@ -266,9 +266,86 @@ Real Percentages
 		
 		
 		
+				
+		//CALCULATING FOR ACCURACY==============================================
+		/*if black:
+		SUM = signal*prior sums
+		signal * prior / sum
+		
+		  if white:
+		signal = 1-signal
+		*/
+		if( {{player.isBlackBall}} == 0){  //black
+			console.log("Black ball");
+			var Denominator = {{ player.Red_Urn_Given }} * {{ player.Assigned_Red }} + {{ player.Yellow_Urn_Given }} * {{ player.Assigned_Yellow }} + {{ player.Green_Urn_Given }} * {{ player.Assigned_Green }}
+			
+			var Red_RealP = {{ player.Red_Urn_Given }} * {{ player.Assigned_Red }} / Denominator;
+			Red_RealP = Red_RealP.toFixed(4);
+			console.log(Red_RealP);
+			
+			var Yellow_RealP = {{ player.Yellow_Urn_Given }} * {{ player.Assigned_Yellow }} / Denominator;
+			Yellow_RealP = Yellow_RealP.toFixed(4);
+			console.log(Yellow_RealP);
+			
+			var Green_RealP = {{ player.Green_Urn_Given }} * {{ player.Assigned_Green }} / Denominator;
+			Green_RealP = Green_RealP.toFixed(4);
+			console.log(Green_RealP);
+		}	
+		
+		
+		else{ //white ball
+			console.log("While ball");
+			var Denominator = (1-{{ player.Red_Urn_Given }}) * {{ player.Assigned_Red }} + (1-{{ player.Yellow_Urn_Given }}) * {{ player.Assigned_Yellow }} + (1-{{ player.Green_Urn_Given }}) * {{ player.Assigned_Green }}
+			
+			var Red_RealP = (1-{{ player.Red_Urn_Given }}) * {{ player.Assigned_Red }} / Denominator;
+			Red_RealP = Red_RealP.toFixed(4);
+			console.log(Red_RealP);
+			
+			var Yellow_RealP = (1-{{ player.Yellow_Urn_Given }}) * {{ player.Assigned_Yellow }} / Denominator;
+			Yellow_RealP = Yellow_RealP.toFixed(4);
+			console.log(Yellow_RealP);
+			
+			var Green_RealP = (1-{{ player.Green_Urn_Given }}) * {{ player.Assigned_Green }} / Denominator;
+			Green_RealP = Green_RealP.toFixed(4);
+			console.log(Green_RealP);
+		}
+		
+		
+		//----------------------------
+		//Adjusting the blocks
+		var RedRealText = document.createElement("p");
+		var RedRealNode = document.createTextNode(Red_RealP*100); //this puts the value of the element in
+		RedRealText.appendChild(RedRealNode);
+
+		var RedReal_Block = document.getElementById("RealRedBlock"); //edits this id 
+		RedReal_Block.setAttribute('style', 'width: ' + Red_RealP*100 + '%'); //sets the attribute value
+		RedReal_Block.appendChild(RedRealText);
+		
+		
+		var YellowRealText = document.createElement("p");
+		var YellowRealNode = document.createTextNode(Yellow_RealP*100); //this puts the value of the element in
+		YellowRealText.appendChild(YellowRealNode);
+
+		var YellowReal_Block = document.getElementById("RealYellowBlock"); //edits this id 
+		YellowReal_Block.setAttribute('style', 'width: ' + Yellow_RealP*100 + '%'); //sets the attribute value
+		YellowReal_Block.appendChild(YellowRealText);
+		
+		
+		var GreenRealText = document.createElement("p");
+		var GreenRealNode = document.createTextNode(Green_RealP*100); //this puts the value of the element in
+		GreenRealText.appendChild(GreenRealNode);
+
+		var GreenReal_Block = document.getElementById("RealGreenBlock"); //edits this id 
+		GreenReal_Block.setAttribute('style', 'width: ' + Green_RealP*100 + '%'); //sets the attribute value
+		GreenReal_Block.appendChild(GreenRealText);
+		//=====================================================================
+		
+		
+		
+		
 		var accuracy_data_1 = document.getElementById("id_Accuracy");
-		accuracy_data_1.value = ReturnAccuracy(RedPp, YellowPp, GreenPp, 40, 50, 10);
-		//for some reason this doesn't work in the scripts page
+		accuracy_data_1.value = ReturnAccuracy(RedPp, YellowPp, GreenPp, Red_RealP, Yellow_RealP, Green_RealP);
+
 		
 		function ReturnAccuracy(Rself, Yself, Gself, Rreal, Yreal, Greal){//Accuracy return. input integers
 			console.log("MADE IT"); //debugging

@@ -41,7 +41,7 @@ SESSION_CONFIGS = [
     {
         'name': 'BeliefDivergence',
         'num_demo_participants': 1,
-        'app_sequence': ['BeliefDivergence2'], 
+        'app_sequence': ['BeliefDivergence', 'BeliefDivergence2'], 
     },
     
     {

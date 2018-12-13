@@ -2,8 +2,6 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-#pandas>=0.22.0
-#import pandas as pd
 
 
 author = 'Joseph Lee'
@@ -73,7 +71,6 @@ class Player(BasePlayer):
 	Yellow_Urn_Given = models.FloatField()
 	Green_Urn_Given = models.FloatField()
 	
-	isGray = models.BooleanField()
 	Accuracy = models.FloatField()
 	
 	#These are the black/white probabilities
