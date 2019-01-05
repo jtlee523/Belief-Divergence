@@ -48,6 +48,7 @@ This will ensure that the BeliefDivergence app will play through both tasks.
 
 
 To customize **Task 1:**
+
 Enter the folder for BeliefDivergence and open models.py
 Notice the following current code block:
 ```
@@ -64,6 +65,7 @@ The entry of data is a list of lists. The indices is as so:
 
 
 To customize **Task 2:**
+
 Enter the folder for BeliefDivergence2 and open models.py
 Notice the following current code block:
 ```
