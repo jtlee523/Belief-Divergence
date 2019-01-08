@@ -24,7 +24,7 @@ Following both tasks is a feedback screen that returns the participants choices 
 December 13, 2018
 Current version has a working task pages and feedback pages. Below are current notes that still need to be updated (from last meeting)
 - [x] Asthetics of the probability bars
-- [ ] "given ball" should return the word "white" or "black"
+- [x] "given ball" should return the word "white" or "black"
 - [ ] Accuracy function should be checked
 - [ ] Payout function should be checked
 - [x] Decimals should all show as percentages
