@@ -80,7 +80,7 @@
         	<div class="block-BPspace"></div>
         	
         	
-        	<div class="block-ballReturn">Given Ball
+        	<div class="block-ballReturn" id="BallReturn_Container"></br>
         			
         			<div id = "ball" class="circle"></div>
         			
@@ -230,10 +230,24 @@ Real Percentages
 			
 			
 			
+		//for the ball and the text Given_Ball
 		var Ball = document.getElementById("ball");
+		var BallContainer = document.getElementById("BallReturn_Container");
+		var Ball_Text = document.createElement("p");
+		//var Given_Ball = document.getElementById("block-ballReturn");
 		if( {{player.isBlackBall}} == 1){
 			Ball.setAttribute('style','background:  white');
-		}						
+			console.log("WHITE BALL");
+			var Ball_Node = document.createTextNode('White Ball');
+		}	
+		
+		else{
+			console.log("BLACK BALL");
+			var Ball_Node = document.createTextNode('Black Ball');	
+		}
+		Ball_Text.appendChild(Ball_Node);
+		BallContainer.appendChild(Ball_Text);
+			
 		
 		
 		
