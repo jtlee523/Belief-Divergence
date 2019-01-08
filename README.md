@@ -23,12 +23,12 @@ Following both tasks is a feedback screen that returns the participants choices 
 ## 2. Current Version
 December 13, 2018
 Current version has a working task pages and feedback pages. Below are current notes that still need to be updated (from last meeting)
-- [ ] Asthetics of the probability bars
+- [x] Asthetics of the probability bars
 - [ ] "given ball" should return the word "white" or "black"
 - [ ] Accuracy function should be checked
 - [ ] Payout function should be checked
-- [ ] Decimals should all show as percentages
-- [ ] Redo task 2 into 2 pages: first page with just the gray urn, and a second with all the info.
+- [x] Decimals should all show as percentages
+- [x] Redo task 2 into 2 pages: first page with just the gray urn, and a second with all the info.
 
 
 
