@@ -3,7 +3,7 @@
 
 
 {% block title %}
-	Task #1 - {{player.round_number}} out of {{Constants.num_rounds}}
+	Task #2 - {{player.round_number}} out of {{Constants.num_rounds}}
 {% endblock %}
 
 
@@ -35,20 +35,24 @@ Page attributes:
 
     <div class="grid-container">
     
+    	<div class="row">
+    		<div class="block-GrayBar"><p>{{ player.Gray_Points}} Points</p></div>
+    	</div>
+    	
         <div class="row">
-            <div id='Red_Urn' class="block-red"></div> 
-            <div id='Yellow_Urn' class="block-yellow"></div> 
-            <div id='Green_Urn' class="block-green"></div> 
+            <div id='Red_Urn' class="block-red"><p>{{player.Red_Points}} Points</p></div> 
+            <div id='Yellow_Urn' class="block-yellow"><p>{{player.Yellow_Points}} Points</p></div> 
+            <div id='Green_Urn' class="block-green"><p>{{player.Green_Points}} Points</p></div> 
         </div> <!-- with row -->
         
         
-     
+        <div class="row"></div> <!-- dead row for spacing -->
         
         
         <!--code for ball probabilities -->
         <div class="row">
-        	<div class="block-ballProbR" > Red Urn Ball Probability
-        		<div class="block-SpaceBar" id = 'Red_Ball_Container'></div>
+        	<div class="block-ballProbR"> Red Urn Ball Probability
+        		<div class="block-SpaceBar" id="Red_Ball_Container"></div>
         		<div id = "RedUrn_Black" class="block-RedB"></div><div id = "RedUrn_White" class="block-RedW"></div>
         		<div class="block-SpaceBar"></br></div>
         	</div> <!-- closes red urn -->
@@ -56,7 +60,7 @@ Page attributes:
         	<div class="block-BPspace"></div>
         	
         	<div class="block-ballProbY"> Yellow Urn Ball Probability 
-        		<div class="block-SpaceBar" id = 'Yellow_Ball_Container'></div>
+        		<div class="block-SpaceBar" id="Yellow_Ball_Container"></div>
         		<div id = "YellowUrn_Black" class="block-YellowB"></div><div id = "YellowUrn_White" class="block-YellowW"></div>
         		<div class="block-SpaceBar"></br></div>
         	</div> <!-- closes yellow urn -->
@@ -66,7 +70,7 @@ Page attributes:
         	
         
         	<div class="block-ballProbG"> Green Urn Ball Probability 
- 				<div class="block-SpaceBar" id = 'Green_Ball_Container'></div>
+ 				<div class="block-SpaceBar" id="Green_Ball_Container"></div>
         		<div id = "GreenUrn_Black" class="block-GreenB"></div><div id = "GreenUrn_White" class="block-GreenW"></div>
         		<div class="block-SpaceBar"></br></div>
         	</div> <!--closes green urn -->
@@ -158,11 +162,15 @@ Page attributes:
 
 <br/>
 
+<!-- this is for gray vs not gray-->
+
+<p><b>Select the Gray or Colored Urns?</b></p> <div>
+	<button id="GRAYbutton" name="isGray" value="1" class="btn btn-primary btn-large">Gray</button>
+	<button name="isGray" value="0" class="btn btn-primary btn-large">Colored</button> </div>
 
 
 
 
-{% next_button %}
 {% endblock %}
 
 
@@ -172,7 +180,7 @@ Page attributes:
 {% block styles %}
     <link href="{% static "global/bootstrap-slider.css" %}" rel="stylesheet">
     <link href="{% static "global/mystyle.css" %}" rel="stylesheet">
-    <link href="{% static "global/Task1.css" %}" rel="stylesheet">
+    <link href="{% static "global/Task2.css" %}" rel="stylesheet">
 {% endblock %}
 
 
@@ -191,8 +199,6 @@ Page attributes:
 			});
 			
 		
-		//====================================================================
-		//Info for the prior blocks. The top bar on the page
 		
 		//Setting the urn text, attributes, etc. First two lines create the box
 		//Next four lines create the text.
@@ -216,6 +222,9 @@ Page attributes:
 		var Green_Urn_Node = document.createTextNode({{player.Green_Urn_Given}}*100 + '%'); //this puts the value of the element in
 		Green_Urn_Text.appendChild(Green_Urn_Node);
 		Green_Urn.appendChild(Green_Urn_Text);
+		
+		
+		
 		//===========================================================================
 		//For the ballProb blocks that indicate black/white ball ratios
 		//TEXT APPENDING
@@ -237,9 +246,9 @@ Page attributes:
 		Green_Ball_Text.appendChild(Green_Ball_Node);
 		GreenBall_Container.appendChild(Green_Ball_Text);
 		
+		
+		
 		//===========================================================================
-		//For the ballProb blocks that indicate black/white ball ratios
-		//BLOCK CREATION
 			
 		//Here I set a variable in script for the id
 		//then i assign it's width using the assigned values
@@ -263,20 +272,12 @@ Page attributes:
 		var Green_WhiteProb = document.getElementById("GreenUrn_White"); //edits this id 
 		Green_WhiteProb.setAttribute('style', 'width: ' + (100-{{player.Assigned_Green}}*100) + '%'); //sets the attribute value
 			
-		//for the ball and the text Given_Ball
 		var Ball = document.getElementById("ball");
-		var Given_Ball = document.getElementById("block-ballReturn");
 		if( {{player.isBlackBall}} == 1){
 			Ball.setAttribute('style','background:  white');
 		}	
-		
-
-
-		
-		
-		
-		
-		
+			
+			
 			
 			var Return_value_array = function() {
 				console.log("CALLED"); //debugging
@@ -286,14 +287,13 @@ Page attributes:
 
    				var FirstNum = valueString[0]; //takes the first number of the array
    			    var SecondNum = valueString[1];  //takes the second number of the array
-   			    document.getElementById("RedBlock").innerHTML = Math.round( (FirstNum) * (1/100) * (100) ) + '%'; //assigns RedBlock
-   			    document.getElementById("YellowBlock").innerHTML = Math.round( (SecondNum - FirstNum) * (1/100) * (100) ) + '%'; //assigns YellowBlock
-   			    document.getElementById("GreenBlock").innerHTML = Math.round( (100 - SecondNum) * (1/100) * (100) ) + '%'; //assigns GreenBlock
+   			    document.getElementById("RedBlock").innerHTML = Math.round( (FirstNum) * (1/100) * (100) )+ '%'; //assigns RedBlock
+   			    document.getElementById("YellowBlock").innerHTML = Math.round( (SecondNum - FirstNum) * (1/100) * (100) )+ '%'; //assigns YellowBlock
+   			    document.getElementById("GreenBlock").innerHTML = Math.round( (100 - SecondNum) * (1/100) * (100) )+ '%'; //assigns GreenBlock
     
   			 	console.log("(FROM INTERNAL) FirstNum is: " + FirstNum); //debugging
   			    console.log("(FROM INTERNAL) SecondNum is: " + SecondNum); //debugging
 				
-				//Local store independent of document.getElement to prevent '%' from causing problems
 				localStorage.setItem("RedBlockResult", Math.round( (FirstNum) * (1/100) * (100) ) );
 				console.log("RED IS: " + localStorage.getItem("RedBlockResult"));
 				
@@ -304,7 +304,6 @@ Page attributes:
 				console.log("YELLOW IS: " + localStorage.getItem("YellowBlockResult"));
 				return;
 			}; 
-			
 			
 			
 			

@@ -2,6 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+#FOR TASK 1
 
 class Task_One(Page):
     pass

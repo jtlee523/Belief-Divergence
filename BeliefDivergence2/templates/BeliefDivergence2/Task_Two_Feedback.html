@@ -23,12 +23,22 @@
 <br/>
 
     <div class="grid-container">
+    
+    	
+    	
+    	<div class="row">
+    		<div class="block-GrayBar"><p>50 Points</p></div>
+    	</div>
+    	
+    	
         <div class="row">
-            <div id="Red_Urn" class="block-red"></div> 
-            <div id="Yellow_Urn" class="block-yellow"></div> 
-            <div id="Green_Urn" class="block-green"></div> 
-        </div> 
+            <div id='Red_Urn' class="block-red"><p>{{player.Red_Points}} Points</p></div> 
+            <div id='Yellow_Urn' class="block-yellow"><p>{{player.Yellow_Points}} Points</p></div> 
+            <div id='Green_Urn' class="block-green"><p>{{player.Green_Points}} Points</p></div> 
+        </div>
         
+        
+        <div class="row"></div> <!-- dead row for spacing -->
         
         
         
@@ -104,7 +114,7 @@
 
 
 
-<br/>
+
 
 My guess
 <div class="grid-container">
@@ -112,13 +122,13 @@ My guess
         <div class="row">
             <div id= user-red-block class="block-red-dynamic"></div>           
             <div id= user-yellow-block class="block-yellow-dynamic"></div> 
-            <div id=user-green-block class="block-green-dynamic"></div> 
+            <div id= user-green-block class="block-green-dynamic"></div> 
         </div> <!-- with row -->
         
         
 </div>
 
-</br>
+
 
 Real Percentages
 <div class="grid-container">
@@ -164,7 +174,8 @@ Real Percentages
 	
     <script>
     	
-    	//Setting the urn text, attributes, etc. First two lines create the box
+    	
+		//Setting the urn text, attributes, etc. First two lines create the box
 		//Next four lines create the text.
 		var Red_Urn = document.getElementById("Red_Urn");
 		Red_Urn.setAttribute('style', 'width: ' + ({{player.Red_Urn_Given}}*100) + '%');
@@ -187,8 +198,11 @@ Real Percentages
 		Green_Urn_Text.appendChild(Green_Urn_Node);
 		Green_Urn.appendChild(Green_Urn_Text);
 		
-    	//=====
-    	var RedBall_Container = document.getElementById("Red_Ball_Container");
+    	
+    	//===========================================================================
+		//For the ballProb blocks that indicate black/white ball ratios
+		//TEXT APPENDING
+		var RedBall_Container = document.getElementById("Red_Ball_Container");
 		var Red_Ball_Text = document.createElement("p");
 		var Red_Ball_Node = document.createTextNode({{player.Assigned_Red}}*100 + '%'); //this puts the value of the element in
 		Red_Ball_Text.appendChild(Red_Ball_Node);
@@ -205,8 +219,8 @@ Real Percentages
 		var Green_Ball_Node = document.createTextNode({{player.Assigned_Green}}*100 + '%'); //this puts the value of the element in
 		Green_Ball_Text.appendChild(Green_Ball_Node);
 		GreenBall_Container.appendChild(Green_Ball_Text);
-		//=====
-    	
+		
+		//===========================================================================
     	
     	
     	var Red_BlackProb = document.getElementById("RedUrn_Black"); //edits this id 
@@ -248,9 +262,8 @@ Real Percentages
 		
 		//RED DYNAMIC BLOCK
 		var RedText = document.createElement("p");
-		var RedNode = document.createTextNode(RedPp + '%'); //this puts the value of the element in
+		var RedNode = document.createTextNode(RedPp+ '%'); //this puts the value of the element in
 		RedText.appendChild(RedNode);
-
 		var redElement = document.getElementById("user-red-block"); //edits this id 
 		redElement.setAttribute('style', 'width: ' + RedPp + '%'); //sets the attribute value
 		redElement.appendChild(RedText);
@@ -259,7 +272,6 @@ Real Percentages
 		var YellowText = document.createElement("p");
 		var YellowNode = document.createTextNode(YellowPp+ '%'); //this puts the value of the element in
 		YellowText.appendChild(YellowNode);
-
 		var yellowElement = document.getElementById("user-yellow-block"); //edits this id 
 		yellowElement.setAttribute('style', 'width: ' + YellowPp + '%'); //sets the attribute value
 		yellowElement.appendChild(YellowText)
@@ -269,7 +281,6 @@ Real Percentages
 		var GreenText = document.createElement("p");
 		var GreenNode = document.createTextNode(GreenPp+ '%'); //this puts the value of the element in
 		GreenText.appendChild(GreenNode);
-
 		var greenElement = document.getElementById("user-green-block"); //edits this id 
 		greenElement.setAttribute('style', 'width: ' + GreenPp + '%'); //sets the attribute value
 		greenElement.appendChild(GreenText)	
@@ -296,9 +307,6 @@ Real Percentages
 		green_data_1.value = GreenPp;
 		
 		
-		
-		
-				
 		//CALCULATING FOR ACCURACY==============================================
 		/*if black:
 		SUM = signal*prior sums
@@ -330,7 +338,7 @@ Real Percentages
 			var Denominator = (1-{{ player.Red_Urn_Given }}) * {{ player.Assigned_Red }} + (1-{{ player.Yellow_Urn_Given }}) * {{ player.Assigned_Yellow }} + (1-{{ player.Green_Urn_Given }}) * {{ player.Assigned_Green }}
 			
 			var Red_RealP = (1-{{ player.Red_Urn_Given }}) * {{ player.Assigned_Red }} / Denominator;
-			Red_RealP = Red_RealP.toFixed(2);
+			Red_RealP = Red_RealP.toFixed(2); //round to 2 digits
 			console.log(Red_RealP);
 			
 			var Yellow_RealP = (1-{{ player.Yellow_Urn_Given }}) * {{ player.Assigned_Yellow }} / Denominator;
@@ -341,7 +349,6 @@ Real Percentages
 			Green_RealP = Green_RealP.toFixed(2);
 			console.log(Green_RealP);
 		}
-		
 		
 		//----------------------------
 		//Adjusting the blocks
@@ -364,7 +371,7 @@ Real Percentages
 		
 		
 		var GreenRealText = document.createElement("p");
-		var GreenRealNode = document.createTextNode(Green_RealP*100 + '%'); //this puts the value of the element in
+		var GreenRealNode = document.createTextNode(Green_RealP*100+ '%'); //this puts the value of the element in
 		GreenRealText.appendChild(GreenRealNode);
 
 		var GreenReal_Block = document.getElementById("RealGreenBlock"); //edits this id 
@@ -373,11 +380,9 @@ Real Percentages
 		//=====================================================================
 		
 		
-		
-		
 		var accuracy_data_1 = document.getElementById("id_Accuracy");
 		accuracy_data_1.value = ReturnAccuracy(RedPp, YellowPp, GreenPp, Red_RealP, Yellow_RealP, Green_RealP);
-
+		//for some reason this doesn't work in the scripts page
 		
 		function ReturnAccuracy(Rself, Yself, Gself, Rreal, Yreal, Greal){//Accuracy return. input integers
 			console.log("MADE IT"); //debugging
