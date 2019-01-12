@@ -23,6 +23,7 @@ Following both tasks is a feedback screen that returns the participants choices 
 ## 2. Current Version
 December 13, 2018
 Current version has a working task pages and feedback pages. Below are current notes that still need to be updated (from last meeting)
+- [ ] **Overall code needs to be cleaned up once finalized. There are many comments, etc.
 - [x] Asthetics of the probability bars
 - [x] "given ball" should return the word "white" or "black"
 - [ ] Accuracy function should be checked
