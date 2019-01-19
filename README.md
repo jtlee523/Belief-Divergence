@@ -1,5 +1,6 @@
 # Belief-Divergence 
 October 2018 - Present
+**NOTE** : Programming is on hold until more information regarding the project. The contents were frozen starting January 15, 2019.
 
 ## Table of Contents 
 1. Intro and Summary
